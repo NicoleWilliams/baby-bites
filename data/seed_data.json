@@ -1,0 +1,44 @@
+[
+    {
+        "name": "Apple",
+        "min_age": "6 months",
+        "nutrition_rating": 3,
+        "allergen": false,
+        "external_id": "Apple"
+    },
+    {
+        "name": "Banana",
+        "min_age": "6 months",
+        "nutrition_rating": 5,
+        "allergen": false,
+        "external_id": "Banana" 
+    },
+    {
+        "name": "Cheese",
+        "min_age": "6 months",
+        "nutrition_rating": 3,
+        "allergen": true,
+        "external_id": "Cheese"  
+    },
+    {
+        "name": "Yogurt",
+        "min_age": "6 months",
+        "nutrition_rating": 5,
+        "allergen": true,
+        "external_id": "Yogurt"    
+    },
+    {
+        "name": "Honey",
+        "min_age": "12 months",
+        "nutrition_rating": 1,
+        "allergen": false,
+        "external_id": "Honey"  
+    },
+    {
+        "name": "Ham",
+        "min_age": "24 months",
+        "nutrition_rating": 3,
+        "allergen": false,
+        "external_id": "Ham"  
+    }
+]
