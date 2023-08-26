@@ -12,7 +12,7 @@ class User(db.Model):
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     email = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(25), nullable=False)
-    phone = db.Column(db.Integer)
+    phone = db.Column(db.String(12))
 
     ratings = db.relationship("Rating", back_populates="user")
     food_schedules = db.relationship("FoodSchedule", back_populates="user")
@@ -26,7 +26,7 @@ class FoodSchedule(db.Model):
     __tablename__ = "food_schedules"
 
     schedule_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    meal_id = db.Column(db.Integer, db.ForeignKey('meals.meal_id'))
+    # meal_id = db.Column(db.Integer, db.ForeignKey('meals.meal_id'))
     food_id = db.Column(db.Integer, db.ForeignKey('foods.food_id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     to_try_date = db.Column(db.Date, nullable=False)
@@ -34,26 +34,27 @@ class FoodSchedule(db.Model):
 
     user = db.relationship("User", back_populates="food_schedules")
     food = db.relationship("Food", back_populates="food_schedules")
-    meal = db.relationship("Meal", back_populates="food_schedules")
+    # meal = db.relationship("Meal", back_populates="food_schedules")
 
     def __repr__(self):
-        return f'<FoodSchedule schedule_id={self.schedule_id} meal_id={self.meal_id} food_id={self.food_id} user_id={self.user_id} to_try_date={self.to_try_date} tried={self.tried}>'
+        return f'<FoodSchedule schedule_id={self.schedule_id} \
+                food_id={self.food_id} user_id={self.user_id}>'
     
 
-class Meal(db.Model):
+# class Meal(db.Model):
 
-    __tablename__ = "meals"
+#     __tablename__ = "meals"
 
-    meal_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    meal_name = db.Column(db.String(50), nullable=False)
-    external_id = db.Column(db.String(50))
+#     meal_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+#     meal_name = db.Column(db.String(50), nullable=False)
+#     external_id = db.Column(db.String(50))
 
-    rating = db.relationship("Rating", back_populates="meal")
-    food_schedules = db.relationship("FoodSchedule", back_populates="meal")
-    meal_foods = db.relationship("MealFood", back_populates="meal")
+#     rating = db.relationship("Rating", back_populates="meal")
+#     food_schedules = db.relationship("FoodSchedule", back_populates="meal")
+#     meal_foods = db.relationship("MealFood", back_populates="meal")
 
-    def __repr__(self):
-        return f'<Meal meal_id={self.meal_id} meal_name={self.meal_name}>'
+#     def __repr__(self):
+#         return f'<Meal meal_id={self.meal_id} meal_name={self.meal_name}>'
     
 
 class Food(db.Model):
@@ -69,7 +70,7 @@ class Food(db.Model):
 
     rating = db.relationship("Rating", back_populates="food")
     food_schedules = db.relationship("FoodSchedule", back_populates="food")
-    meal_foods = db.relationship("MealFood", back_populates="food")
+    # meal_foods = db.relationship("MealFood", back_populates="food")
 
     def __repr__(self):
         return f'<Food food_id={self.food_id} food_name={self.food_name}>'
@@ -81,33 +82,34 @@ class Rating(db.Model):
 
     rating_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     score = db.Column(db.Integer, nullable=False)
-    meal_id = db.Column(db.Integer, db.ForeignKey('meals.meal_id'))
+    # meal_id = db.Column(db.Integer, db.ForeignKey('meals.meal_id'))
     food_id = db.Column(db.Integer, db.ForeignKey('foods.food_id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     date_rated = db.Column(db.DateTime)
     comment = db.Column(db.Text)
 
-    meal = db.relationship("Meal", back_populates="rating")
+    # meal = db.relationship("Meal", back_populates="rating")
     user = db.relationship("User", back_populates="ratings")
     food = db.relationship("Food", back_populates="rating")
 
     def __repr__(self):
-        return f'<Rating rating_id={self.rating_id} score={self.score} meal_id={self.meal_id} food_id={self.food_id} user_id={self.user_id}>'
+        return f'<Rating rating_id={self.rating_id} score={self.score} \
+                    food_id={self.food_id} user_id={self.user_id}>'
     
 
-class MealFood(db.Model):
+# class MealFood(db.Model):
 
-    __tablename__ = "meal_foods"
+#     __tablename__ = "meal_foods"
 
-    meal_food_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    meal_id = db.Column(db.Integer, db.ForeignKey('meals.meal_id'), nullable=False)
-    food_id = db.Column(db.Integer, db.ForeignKey('foods.food_id'), nullable=False)
+#     meal_food_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+#     meal_id = db.Column(db.Integer, db.ForeignKey('meals.meal_id'), nullable=False)
+#     food_id = db.Column(db.Integer, db.ForeignKey('foods.food_id'), nullable=False)
 
-    meal = db.relationship("Meal", back_populates="meal_foods")
-    food = db.relationship("Food", back_populates="meal_foods")
+#     meal = db.relationship("Meal", back_populates="meal_foods")
+#     food = db.relationship("Food", back_populates="meal_foods")
 
-    def __repr__(self):
-        return f'<MealFood meal_food_id={self.meal_food_id} meal_id={self.meal_id} food_id={self.food_id}>'
+#     def __repr__(self):
+#         return f'<MealFood meal_food_id={self.meal_food_id} meal_id={self.meal_id} food_id={self.food_id}>'
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///baby-food-tracker", echo=False):

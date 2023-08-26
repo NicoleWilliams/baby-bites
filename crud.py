@@ -1,6 +1,6 @@
 """CRUD operations."""
 
-from model import db, User, FoodSchedule, Meal, Food, Rating, MealFood, connect_to_db
+from model import db, User, FoodSchedule, Food, Rating, connect_to_db
 
 def create_user(email, password, phone):
     """Create and return a new user."""
@@ -16,20 +16,20 @@ def get_user_by_email(email):
     return User.query.filter(User.email == email).first()
 
 
-def create_food_schedule(meal_id, food_id, user_id, to_try_date, tried):
+def create_food_schedule(food_id, user_id, to_try_date, tried):
     """Create and return a new food schedule."""
 
-    food_schedule = FoodSchedule(meal_id=meal_id, food_id=food_id, user_id=user_id, to_try_date=to_try_date, tried=tried)
+    food_schedule = FoodSchedule(food_id=food_id, user_id=user_id, to_try_date=to_try_date, tried=tried)
 
     return food_schedule
 
 
-def create_meal(meal_name, external_id):
-    """Create and return a new meal."""
+# def create_meal(meal_name, external_id):
+#     """Create and return a new meal."""
 
-    meal = Meal(meal_name=meal_name, external_id=external_id)
+#     meal = Meal(meal_name=meal_name, external_id=external_id)
 
-    return meal
+#     return meal
 
 
 def create_food(food_name, min_age, nutrition_rating, allergen, external_id):
@@ -52,10 +52,10 @@ def get_foods():
     return Food.query.all()
 
 
-def create_rating(score, meal_id, food_id, user_id, date_rated, comment):
+def create_rating(score, food, user, date_rated, comment):
     """Create and return new rating."""
 
-    rating = Rating(score=score, meal_id=meal_id, food_id=food_id, user_id=user_id, date_rated=date_rated, comment=comment)
+    rating = Rating(score=score, food=food, user=user, date_rated=date_rated, comment=comment)
 
     return rating
 
@@ -67,18 +67,24 @@ def update_rating(rating_id, new_score):
     rating.score = new_score
 
 
-def create_meal_food(meal_id, food_id):
-    """Create and return new meal-food."""
+# def create_meal_food(meal_id, food_id):
+#     """Create and return new meal-food."""
 
-    meal_food = MealFood(meal_id=meal_id, food_id=food_id)
+#     meal_food = MealFood(meal_id=meal_id, food_id=food_id)
 
-    return meal_food
+#     return meal_food
 
 
 def return_ratings():
     """Return all ratings."""
 
     return Rating.query.all()
+
+
+def get_user_by_id(user_id):
+    """Return a user by primary key."""
+
+    return User.query.get(user_id)
 
 
 

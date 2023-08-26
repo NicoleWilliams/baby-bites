@@ -9,8 +9,8 @@ import crud
 import model
 import server
 
-os.system("dropdb ratings")
-os.system("createdb ratings")
+os.system("dropdb baby-food-tracker")
+os.system("createdb baby-food-tracker")
 
 model.connect_to_db(server.app)
 model.db.create_all()
@@ -20,7 +20,6 @@ with open("data/seed_data.json") as f:
     food_data = json.loads(f.read())
 
 # Create foods, store them in list so we can use them to create fake ratings
-foods_in_db = []
 for food in food_data:
     name, min_age, nutrition_rating, allergen, external_id = (
         food["name"],
@@ -31,10 +30,12 @@ for food in food_data:
     )
     
     db_food = crud.create_food(name, min_age, nutrition_rating, allergen, external_id)
-    foods_in_db.append(db_food)
+    model.db.session.add(db_food)
+    model.db.session.commit()
 
-model.db.session.add_all(foods_in_db)
-model.db.session.commit()
+all_foods_in_db = crud.get_foods()
+
+print(all_foods_in_db, 'foods in database, line 39')
 
 # Create 5 users; each user will make 5 ratings
 for n in range(5):
@@ -44,12 +45,17 @@ for n in range(5):
 
     user = crud.create_user(email, password, phone)
     model.db.session.add(user)
+    model.db.session.commit()
 
     for _ in range(5):
-        random_food = choice(foods_in_db)
+        random_food = choice(all_foods_in_db)
+        print(random_food, 'random food choice line 54')
+        
         score = randint(1, 3)
-
-        rating = crud.create_rating(user, random_food, score)
+        date_rated = datetime.now()
+        comment = "test comment"
+        rating = crud.create_rating(score, random_food, user,  
+                                    date_rated.strftime("%x"), 
+                                    comment)
         model.db.session.add(rating)
-
-model.db.session.commit()
+        model.db.session.commit()

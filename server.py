@@ -19,7 +19,7 @@ def homepage():
     return render_template("homepage.html")
 
 
-@app.route("/register", methods=["POST"])
+@app.route("/users", methods=["POST"])
 def register_user():
     """Create a new user."""
 
@@ -37,6 +37,15 @@ def register_user():
         flash("Account created! Please log in.")
 
     return redirect("/")
+
+
+@app.route("/user/<user_id>")
+def show_user(user_id):
+    """Show details on a user."""
+
+    user = crud.get_user_by_id(user_id)
+
+    return render_template("user_details.html", user=user)
 
 
 @app.route("/login", methods=["POST"])
