@@ -35,7 +35,7 @@ for food in food_data:
 
 all_foods_in_db = crud.get_foods()
 
-print(all_foods_in_db, 'foods in database, line 39')
+# print(all_foods_in_db, 'foods in database, line 39')
 
 # Create 5 users; each user will make 5 ratings
 for n in range(5):
@@ -49,7 +49,7 @@ for n in range(5):
 
     for _ in range(5):
         random_food = choice(all_foods_in_db)
-        print(random_food, 'random food choice line 54')
+        # print(random_food, 'random food choice line 54')
         
         score = randint(1, 3)
         date_rated = datetime.now()
@@ -59,3 +59,17 @@ for n in range(5):
                                     comment)
         model.db.session.add(rating)
         model.db.session.commit()
+
+# Create 5 food schedules, 1 for each user.
+users_in_db = crud.get_users()
+
+for user in users_in_db:
+    random_food = choice(all_foods_in_db)
+    to_try_date = date_rated.strftime("%x")
+    tried = False
+
+    food_schedule = crud.create_food_schedule(random_food, user, 
+                                              to_try_date, tried)
+    
+    model.db.session.add(food_schedule)
+    model.db.session.commit()

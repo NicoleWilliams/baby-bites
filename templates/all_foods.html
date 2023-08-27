@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}All Foods{% endblock %}
+
+{% block body %}
+<dl>
+{% for food in foods %}
+  <dt>Name: {{ food.food_name }}</dt>
+    <dd>Minimum Age: {{ food.min_age }}</dd>
+    <dd>Nutrition Rating: {{ food.nutrition_rating }}</dd>
+    <dd>Common Allergen: {{ food.allergen }}</dd>
+{% endfor %}
+</dl>
+
+{% endblock %}

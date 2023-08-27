@@ -36,7 +36,7 @@ def register_user():
         db.session.commit()
         flash("Account created! Please log in.")
 
-    return redirect("/")
+    return redirect("/calendar/{email}")
 
 
 @app.route("/user/<user_id>")
@@ -62,7 +62,7 @@ def process_login():
         session["user_email"] = user.email
         flash(f"Hello again, {user.email}.")
 
-    return redirect("/calendar") 
+    return redirect("/calendar/{email}") 
 
 
 @app.route("/foods")
@@ -108,9 +108,46 @@ def update_rating():
     return "Rating updated"
 
 
+@app.route("/users/calendar/<user>", methods=["POST"])
+def create_calendar():
+    """Create a food calendar for a user."""
+
+    logged_in_email = session.get("user_email")
+
+    if logged_in_email is None:
+        flash("You must log in to create a schedule.")
+    else:
+        user = crud.get_user_by_email(logged_in_email)
+
+    food_schedule = crud.create_food_schedule(food="", user=user, 
+                                              to_try_date="", tried=False)
+    
+    db.session.add(food_schedule)
+    db.session.commit()
+
+    return redirect(f"/calendar/{user}")
+
+
+@app.route("/edit_calendar", methods=["POST"])
+def edit_calendar():
+    """Add or remove items from calendar."""
+
+    return "Calendar updated"
+
+
 @app.route("/calendar")
-def calendar():
+def view_calendar():
     """View calendar with scheduled foods."""
+
+    logged_in_email = session.get("user_email")
+
+    if logged_in_email is None:
+        flash("You must log in to view your schedule.")
+    else:
+        user = crud.get_user_by_email(logged_in_email)
+        food_schedule = crud.return_food_schedule()
+
+    return render_template("food_schedule.html", user=user, food_schedule=food_schedule)
 
 
 @app.route("/ratings")
@@ -119,12 +156,8 @@ def view_ratings():
 
     ratings = crud.return_ratings()
 
-    return render_template("ratings.html", ratings=ratings)
+    return render_template("all_ratings.html", ratings=ratings)
 
-
-@app.route("/add-to-schedule")
-def add_to_schedule():
-    """Search for and select foods and add to calendar."""
 
 
 if __name__ == "__main__":

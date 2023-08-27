@@ -9,6 +9,11 @@ def create_user(email, password, phone):
 
     return user
 
+def get_users():
+    """Return all users."""
+
+    return User.query.all()
+
 
 def get_user_by_email(email):
     """Return a user by email."""
@@ -16,10 +21,10 @@ def get_user_by_email(email):
     return User.query.filter(User.email == email).first()
 
 
-def create_food_schedule(food_id, user_id, to_try_date, tried):
+def create_food_schedule(food, user, to_try_date, tried):
     """Create and return a new food schedule."""
 
-    food_schedule = FoodSchedule(food_id=food_id, user_id=user_id, to_try_date=to_try_date, tried=tried)
+    food_schedule = FoodSchedule(food=food, user=user, to_try_date=to_try_date, tried=tried)
 
     return food_schedule
 
@@ -73,6 +78,11 @@ def update_rating(rating_id, new_score):
 #     meal_food = MealFood(meal_id=meal_id, food_id=food_id)
 
 #     return meal_food
+
+def return_food_schedule():
+    """Return food schedule"""
+
+    return FoodSchedule.query.all()
 
 
 def return_ratings():

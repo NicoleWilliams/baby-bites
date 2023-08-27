@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}All Ratings{% endblock %}
+
+{% block body %}
+<dl>
+  {% for rating in ratings %}
+    <dt>Food: {{ rating.food.food_name }}</dt>
+      <dd>Score: {{ rating.score }}</dd>
+      <dd>Date Rated: {{ rating.date_rated }}</dd>
+      <dd>Comments: {{ rating.comment }}</dd>
+  {% endfor %}
+</dl>
+{% endblock %}

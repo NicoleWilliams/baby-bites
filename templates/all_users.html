@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}All Users{% endblock %}
+
+{% block body %}
+<dl>
+{% for user in users %}
+  <dt>Email: {{ user.email }}</dt>
+    <dd>Phone: {{ user.phone }}</dd>
+    <dd>Food Schedule Id: {{ user.foods_schedule }}</dd>
+{% endfor %}
+</dl>
+
+{% endblock %}
