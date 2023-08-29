@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ food.food_name }}{% endblock %}
+
+{% block body %}
+<h1>{{ food.food_name }}</h1>
+
+  <p>Minimum Age: {{ food.min_age }}</p>
+  <p>Nutrition Rating: {{ food.nutrition_rating }}</p>
+  <p>Common Allergen: {{ food.allergen }}</p>
+
+{% endblock %}

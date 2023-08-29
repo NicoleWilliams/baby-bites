@@ -19,6 +19,15 @@ def homepage():
     return render_template("homepage.html")
 
 
+@app.route("/users")
+def all_users():
+    """View all users."""
+
+    users = crud.get_users()
+
+    return render_template("all_users.html", users=users)
+
+
 @app.route("/users", methods=["POST"])
 def register_user():
     """Create a new user."""
@@ -36,10 +45,10 @@ def register_user():
         db.session.commit()
         flash("Account created! Please log in.")
 
-    return redirect("/calendar/{email}")
+    return redirect("/")
 
 
-@app.route("/user/<user_id>")
+@app.route("/users/<user_id>")
 def show_user(user_id):
     """Show details on a user."""
 
@@ -72,6 +81,15 @@ def all_foods():
     foods = crud.get_foods()
 
     return render_template("all_foods.html", foods=foods)
+
+
+@app.route("/foods/<food_id>")
+def show_food(food_id):
+    """Show details on a particular food."""
+
+    food = crud.get_food_by_id(food_id)
+
+    return render_template("food_detail.html", food=food)
 
 
 @app.route("/foods/<food_id>/ratings", methods=["POST"]) 

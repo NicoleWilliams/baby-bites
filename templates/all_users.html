@@ -3,12 +3,15 @@
 {% block title %}All Users{% endblock %}
 
 {% block body %}
-<dl>
-{% for user in users %}
-  <dt>Email: {{ user.email }}</dt>
-    <dd>Phone: {{ user.phone }}</dd>
-    <dd>Food Schedule Id: {{ user.foods_schedule }}</dd>
-{% endfor %}
-</dl>
+  <h1>All Users</h1>
 
+  <ul>
+    {% for user in users %}
+      <li>
+        <a href="/users/{{ user.user_id }}">
+          {{user.email}}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
 {% endblock %}

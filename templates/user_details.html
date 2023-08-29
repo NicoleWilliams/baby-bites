@@ -4,10 +4,11 @@
 
 {% block body %}
 <h1>{{ user.email }}</h1>
+<h3>Phone: {{ user.phone }}</h3>
 <ul>
 {% for rating in user.ratings %}
     <li>
-        {{ rating.food.name }}:
+        {{ rating.food.food_name }}:
         <span class=rating_num_{{ rating.rating_id }} >
             {{ rating.score }}
         </span>
