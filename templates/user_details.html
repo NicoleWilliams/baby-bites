@@ -5,14 +5,20 @@
 {% block body %}
 <h1>{{ user.email }}</h1>
 <h3>Phone: {{ user.phone }}</h3>
+
+<p>
+  <a href="/calendar/{{ user.user_id }}">
+    {{ user.email }}'s schedule
+  </a>
+</p>
 <ul>
 {% for rating in user.ratings %}
-    <li>
-        {{ rating.food.food_name }}:
-        <span class=rating_num_{{ rating.rating_id }} >
-            {{ rating.score }}
-        </span>
-    </li>
+  <li>
+    {{ rating.food.food_name }}:
+    <span class=rating_num_{{ rating.rating_id }}>
+      {{ rating.score }}
+    </span>
+  </li>
 {% endfor %}
 </ul>
 {% endblock %}

@@ -71,7 +71,7 @@ def process_login():
         session["user_email"] = user.email
         flash(f"Hello again, {user.email}.")
 
-    return redirect("/calendar/{email}") 
+    return redirect("/") 
 
 
 @app.route("/foods")
@@ -153,8 +153,8 @@ def edit_calendar():
     return "Calendar updated"
 
 
-@app.route("/calendar")
-def view_calendar():
+@app.route("/calendar/<schedule_id>")
+def view_calendar(schedule_id):
     """View calendar with scheduled foods."""
 
     logged_in_email = session.get("user_email")
@@ -163,7 +163,7 @@ def view_calendar():
         flash("You must log in to view your schedule.")
     else:
         user = crud.get_user_by_email(logged_in_email)
-        food_schedule = crud.return_food_schedule()
+        food_schedule = crud.get_schedule_by_id(schedule_id)
 
     return render_template("food_schedule.html", user=user, food_schedule=food_schedule)
 

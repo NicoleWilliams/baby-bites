@@ -97,6 +97,12 @@ def get_user_by_id(user_id):
     return User.query.get(user_id)
 
 
+def get_schedule_by_id(schedule_id):
+    """Return a schedule by primary key."""
+
+    return FoodSchedule.query.get(schedule_id)
+
+
 
 if __name__ == '__main__':
     from server import app
