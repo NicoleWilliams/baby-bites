@@ -103,6 +103,12 @@ def get_schedule_by_id(schedule_id):
     return FoodSchedule.query.get(schedule_id)
 
 
+def get_schedule_id_by_user_id(user_id):
+    """Return a schedule id from a user id."""
+
+    schedule = FoodSchedule.query.filter(FoodSchedule.user_id == user_id).first()
+    return schedule.schedule_id
+
 
 if __name__ == '__main__':
     from server import app

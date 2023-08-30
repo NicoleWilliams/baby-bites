@@ -63,15 +63,18 @@ def process_login():
 
     email = request.form.get("email")
     password = request.form.get("password")
+    
 
     user = crud.get_user_by_email(email)
+
     if not user or user.password != password:
         flash("The email or password you entered is incorrect.")
     else:
         session["user_email"] = user.email
-        flash(f"Hello again, {user.email}.")
+        flash(f"Hello again, {user.email}.") ## want to replace email with name
 
-    return redirect("/") 
+    schedule_id = crud.get_schedule_id_by_user_id(user.user_id)
+    return redirect(f"/calendar/{schedule_id}") ## want to redirect to user's calendar
 
 
 @app.route("/foods")
