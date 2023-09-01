@@ -53,8 +53,17 @@ def show_user(user_id):
     """Show details on a user."""
 
     user = crud.get_user_by_id(user_id)
+    schedule_events = crud.get_schedule_ids_by_user_id(user_id)
+    to_try_dates = set()
+    
+    for schedule_event in schedule_events:
+        to_try_dates.add(schedule_event.to_try_date)
 
-    return render_template("user_details.html", user=user)
+    to_try_dates = sorted(to_try_dates)
+
+    return render_template("user_details.html", user=user, 
+                           schedule_events=schedule_events,
+                           to_try_dates=to_try_dates)
 
 
 @app.route("/login", methods=["POST"])
@@ -73,8 +82,7 @@ def process_login():
         session["user_email"] = user.email
         flash(f"Hello again, {user.email}.") ## want to replace email with name
 
-    schedule_id = crud.get_schedule_id_by_user_id(user.user_id)
-    return redirect(f"/calendar/{schedule_id}") ## want to redirect to user's calendar
+    return redirect(f"/users/{user.user_id}") 
 
 
 @app.route("/foods")
@@ -167,8 +175,11 @@ def view_calendar(schedule_id):
     else:
         user = crud.get_user_by_email(logged_in_email)
         food_schedule = crud.get_schedule_by_id(schedule_id)
+        to_try_date = crud.get_to_try_dates_by_schedule_id(schedule_id)
 
-    return render_template("food_schedule.html", user=user, food_schedule=food_schedule)
+    return render_template("food_schedule.html", user=user, 
+                           food_schedule=food_schedule, 
+                           to_try_date=to_try_date)
 
 
 @app.route("/ratings")

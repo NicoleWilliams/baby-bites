@@ -4,13 +4,23 @@
 
 {% block body %}
 <h1>{{ user.email }}</h1>
-<h3>Phone: {{ user.phone }}</h3>
+<p>Phone: {{ user.phone }}</p>
 
-<p>
-  <a href="/calendar/{{ user.user_id }}">
-    {{ user.email }}'s schedule
-  </a>
-</p>
+<h2>Schedule</h2>
+
+{% for to_try_date in to_try_dates %}
+<h3>{{ to_try_date }}</h3>
+    {% for schedule_event in schedule_events %}
+      {% if schedule_event.to_try_date == to_try_date %}
+        <ul>
+          <li>{{ schedule_event.food.food_name }}, Tried? {{ schedule_event.tried }}</li>
+        </ul>
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+
+
+<h2>Ratings</h2>
 <ul>
 {% for rating in user.ratings %}
   <li>

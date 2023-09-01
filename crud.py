@@ -103,11 +103,19 @@ def get_schedule_by_id(schedule_id):
     return FoodSchedule.query.get(schedule_id)
 
 
-def get_schedule_id_by_user_id(user_id):
-    """Return a schedule id from a user id."""
+def get_schedule_ids_by_user_id(user_id):
+    """Return all schedule ids from a user id."""
 
-    schedule = FoodSchedule.query.filter(FoodSchedule.user_id == user_id).first()
-    return schedule.schedule_id
+    schedules = FoodSchedule.query.filter(FoodSchedule.user_id == user_id).all()
+    return schedules
+
+
+def get_to_try_dates_by_schedule_id(schedule_id):
+    """Return the to try dates by primary key."""
+    
+    schedule = FoodSchedule.query.filter(FoodSchedule.schedule_id == schedule_id).first()
+    return schedule.to_try_date
+
 
 
 if __name__ == '__main__':
