@@ -9,4 +9,27 @@
   <p>Nutrition Rating: {{ food.nutrition_rating }}</p>
   <p>Common Allergen: {{ food.allergen }}</p>
 
-{% endblock %}
+  
+  {% if session.get('user_email') %}
+  <h2>Rate this food</h2>
+  <form action="/foods/{{ food.food_id }}/ratings" method="POST">
+    <p>
+      Rating:
+      <select name="rating">
+        <option value="">Select rating</option>
+        {% for num in range (1,4) %}
+        <option value="{{ num }}">{{ num }}</option>
+        {% endfor %}
+      </select>
+    </p>
+    <p>
+      <label for="comment">Comments:</label>
+      <input type="text" id="comment" name="comment">
+    </p>
+
+    <p><input type="submit"></p>
+  </form>
+  {% endif %}
+
+  <p><a href="/users/{{ food.food_scheudules.user_id }}">Return to Profile</a></p>
+  {% endblock %}

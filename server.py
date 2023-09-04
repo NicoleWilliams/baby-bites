@@ -4,6 +4,7 @@ from flask import (Flask, render_template, request, flash, session,
                    redirect)
 from model import connect_to_db, db
 import crud
+from datetime import datetime
 
 from jinja2 import StrictUndefined
 
@@ -109,6 +110,8 @@ def create_rating(food_id):
 
     logged_in_email = session.get("user_email")
     rating_score = request.form.get("rating")
+    comment = request.form.get("comment")        
+    date_rated = datetime.now().strftime("%x")
 
     if logged_in_email is None:
         flash("You must log in to rate a food.")
@@ -118,13 +121,13 @@ def create_rating(food_id):
         user = crud.get_user_by_email(logged_in_email)
         food = crud.get_food_by_id(food_id)
 
-        rating = crud.create_rating(user, food, int(rating_score)) # how to convert this to an emoji?
+        rating = crud.create_rating(int(rating_score), food, user, date_rated, comment) # how to convert this to an emoji?
         db.session.add(rating)
         db.session.commit()
 
         flash(f"You rated this food {rating_score}.")
 
-    return redirect(f"/food/{food_id}")
+    return redirect(f"/foods/{food_id}")
 
 
 @app.route("/update_rating", methods=["POST"])
@@ -137,24 +140,24 @@ def update_rating():
     return "Rating updated"
 
 
-@app.route("/users/calendar/<user>", methods=["POST"])
-def create_calendar():
-    """Create a food calendar for a user."""
+# @app.route("/users/calendar/<user>", methods=["POST"])
+# def create_calendar():
+#     """Create a food calendar for a user."""
 
-    logged_in_email = session.get("user_email")
+#     logged_in_email = session.get("user_email")
 
-    if logged_in_email is None:
-        flash("You must log in to create a schedule.")
-    else:
-        user = crud.get_user_by_email(logged_in_email)
+#     if logged_in_email is None:
+#         flash("You must log in to create a schedule.")
+#     else:
+#         user = crud.get_user_by_email(logged_in_email)
 
-    food_schedule = crud.create_food_schedule(food="", user=user, 
-                                              to_try_date="", tried=False)
+#     food_schedule = crud.create_food_schedule(food="", user=user, 
+#                                               to_try_date="", tried=False)
     
-    db.session.add(food_schedule)
-    db.session.commit()
+#     db.session.add(food_schedule)
+#     db.session.commit()
 
-    return redirect(f"/calendar/{user}")
+#     return redirect(f"/calendar/{user}")
 
 
 @app.route("/edit_calendar", methods=["POST"])

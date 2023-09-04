@@ -5,6 +5,7 @@
 {% block body %}
 <h1>{{ user.email }}</h1>
 <p>Phone: {{ user.phone }}</p>
+<p><a href="/foods">View all available foods to try</a></p>
 
 <h2>Schedule</h2>
 
@@ -13,7 +14,10 @@
     {% for schedule_event in schedule_events %}
       {% if schedule_event.to_try_date == to_try_date %}
         <ul>
-          <li>{{ schedule_event.food.food_name }}, Tried? {{ schedule_event.tried }}</li>
+          <li>
+            <a href="/foods/{{ schedule_event.food.food_id }}">
+            {{ schedule_event.food.food_name }},</a> 
+            Tried? {{ schedule_event.tried }}</li>
         </ul>
       {% endif %}
     {% endfor %}
@@ -21,14 +25,20 @@
 
 
 <h2>Ratings</h2>
-<ul>
-{% for rating in user.ratings %}
-  <li>
-    {{ rating.food.food_name }}:
-    <span class=rating_num_{{ rating.rating_id }}>
-      {{ rating.score }}
-    </span>
-  </li>
-{% endfor %}
-</ul>
+<table>
+  <tr>
+    <th>Food</th>
+    <th>Score</th>
+    <th>Date</th>
+    <th>Comments</th>
+  </tr>
+  {% for rating in user.ratings %}
+  <tr>
+    <td>{{ rating.food.food_name }}</td>
+    <td>{{ rating.score }}</td>
+    <td>{{ rating.date_rated.strftime("%x") }}</td>
+    <td>{{ rating.comment }}</td>
+  </tr>
+  {% endfor %}
+</table>
 {% endblock %}
