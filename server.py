@@ -1,7 +1,7 @@
 """Server for baby food tracker app."""
 
 from flask import (Flask, render_template, request, flash, session,
-                   redirect)
+                   redirect, jsonify)
 from model import connect_to_db, db
 import crud
 from datetime import datetime
@@ -161,11 +161,17 @@ def update_rating():
 #     return redirect(f"/calendar/{user}")
 
 
-@app.route("/edit_calendar", methods=["POST"])
+@app.route("/edit-calendar", methods=["POST"])
 def edit_calendar():
     """Add or remove items from calendar."""
 
-    return "Calendar updated"
+    food_id = request.json.get("id")
+    food_name = request.json.get("name")
+    print(food_id, 'line 170')
+    print(food_name, 'line 171')
+    # add date picker and add into form data, grab in flask view route and store, redirect to schedule
+    
+    return jsonify({'status': 200, 'message': "Schedule updated"})
 
 
 @app.route("/calendar/<schedule_id>")
