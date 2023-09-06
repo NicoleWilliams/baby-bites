@@ -100,8 +100,9 @@ def show_food(food_id):
     """Show details on a particular food."""
 
     food = crud.get_food_by_id(food_id)
+    user = crud.get_user_by_email(session.get("user_email"))
 
-    return render_template("food_detail.html", food=food)
+    return render_template("food_detail.html", food=food, user=user)
 
 
 @app.route("/foods/<food_id>/ratings", methods=["POST"]) 

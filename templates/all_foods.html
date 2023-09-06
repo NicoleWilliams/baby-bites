@@ -8,9 +8,12 @@
 
     <li>
       <a href="/foods/{{ food.food_id }}">
-        {{ food.food_name }}
-      </a>
+        {{ food.food_name }}</a>
+      <button type="button" class="add-to-schedule-button" data-name="{{ food.food_name }}">Add To Schedule</button>
+      <p></p>
     </li>
   {% endfor %}
 </ul> 
+
+<script src="../static/event_handlers.js" type="text/javascript"></script>
 {% endblock %}
