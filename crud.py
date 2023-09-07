@@ -29,14 +29,6 @@ def create_food_schedule(food, user, to_try_date, tried):
     return food_schedule
 
 
-# def create_meal(meal_name, external_id):
-#     """Create and return a new meal."""
-
-#     meal = Meal(meal_name=meal_name, external_id=external_id)
-
-#     return meal
-
-
 def create_food(food_name, min_age, nutrition_rating, allergen, external_id):
     """Create and return a new food."""
 
@@ -71,13 +63,6 @@ def update_rating(rating_id, new_score):
     rating = Rating.query.get(rating_id)
     rating.score = new_score
 
-
-# def create_meal_food(meal_id, food_id):
-#     """Create and return new meal-food."""
-
-#     meal_food = MealFood(meal_id=meal_id, food_id=food_id)
-
-#     return meal_food
 
 def return_food_schedule():
     """Return food schedule"""

@@ -1,15 +1,10 @@
+Babel==2.12.1
 cachetools==5.3.1
 certifi==2023.7.22
 charset-normalizer==3.2.0
 click==8.1.6
 Flask==2.0.1
 Flask-SQLAlchemy==2.5.1
-google-api-core==2.11.1
-google-api-python-client==2.97.0
-google-auth==2.22.0
-google-auth-httplib2==0.1.0
-google-auth-oauthlib==1.0.0
-googleapis-common-protos==1.60.0
 greenlet==2.0.2
 httplib2==0.22.0
 idna==3.4

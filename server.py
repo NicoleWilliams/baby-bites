@@ -5,12 +5,20 @@ from flask import (Flask, render_template, request, flash, session,
 from model import connect_to_db, db
 import crud
 from datetime import datetime
-
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
+
+MONTHS = ["January", "February", "March", "April", "May", "June", 
+          "July", "August", "September", "October", "November", "December"]
+
+DAYS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", 
+        "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+        "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"]
+
+YEARS = ["2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030"]
 
 
 @app.route("/")
@@ -92,7 +100,7 @@ def all_foods():
 
     foods = crud.get_foods()
 
-    return render_template("all_foods.html", foods=foods)
+    return render_template("all_foods.html", foods=foods, months=MONTHS, years=YEARS, days=DAYS)
 
 
 @app.route("/foods/<food_id>")
@@ -161,15 +169,20 @@ def update_rating():
 #     return redirect(f"/calendar/{user}")
 
 
+
+
 @app.route("/edit-calendar", methods=["POST"])
 def edit_calendar():
     """Add or remove items from calendar."""
 
     food_id = request.json.get("id")
     food_name = request.json.get("name")
-    print(food_id, 'line 170')
-    print(food_name, 'line 171')
-    # add date picker and add into form data, grab in flask view route and store, redirect to schedule
+    
+    # print(food_id, 'line 170')
+    # print(food_name, 'line 171')
+    # add date picker and add into form data, 
+    # grab in flask view route and store, 
+    # redirect to schedule
     
     return jsonify({'status': 200, 'message': "Schedule updated"})
 

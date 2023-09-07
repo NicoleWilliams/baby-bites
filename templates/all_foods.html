@@ -9,7 +9,33 @@
     <li>
       <a href="/foods/{{ food.food_id }}">
         {{ food.food_name }}</a>
-      <button type="button" class="add-to-schedule-button" data-name="{{ food.food_name }}" data-id="{{ food.food_id }}">Add To Schedule</button>
+
+        <form type="submit" name="add-to-schedule-form" class="add-to-schedule-form">
+          
+          <label for="add-to-schedule-form">Select a date to try this food.</label>
+          
+          <select name="month">
+            {% for month in months %}
+            <option value="{{ month }}">{{ month }}</option>
+            {% endfor %}
+          </select>
+          
+          <select name="day">
+            {% for day in days %}
+            <option value="{{ day }}">{{ day }}</option>
+            {% endfor %}
+          </select>
+          
+          <select name="year">
+            {% for year in years %}
+            <option value="{{ year }}">{{ year }}</option>
+            {% endfor %}
+          </select>
+          
+          <button type="button" class="add-to-schedule-button" data-name="{{ food.food_name }}" 
+          data-id="{{ food.food_id }}">Add To Schedule</button>
+        
+        </form>
       <p></p>
     </li>
   {% endfor %}
