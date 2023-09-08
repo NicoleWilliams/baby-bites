@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ user.email }}'s Page{% endblock %}
+{% block title %}{{ user.fname }}'s Page{% endblock %}
 
 {% block body %}
-<h1>{{ user.email }}</h1>
+<h1>{{ user.fname }}</h1>
 <p>Phone: {{ user.phone }}</p>
 <p><a href="/foods">View all available foods to try</a></p>
 

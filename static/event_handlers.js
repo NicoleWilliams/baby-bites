@@ -7,11 +7,14 @@ const addToScheduleButton = document.querySelectorAll('.add-to-schedule-button')
 addToScheduleButton.forEach(button => button.addEventListener('click', event => {
   let foodName = event.target.getAttribute("data-name")
   let foodId = event.target.getAttribute("data-id")
-  alert(foodName);
+  let tryDate = document.querySelector(`#try-date-${foodId}`).value
+  
+  console.log(tryDate)
 
   const data = {
     id: foodId, 
     name: foodName,
+    date: tryDate
   }
 
   fetch('/edit-calendar', { 

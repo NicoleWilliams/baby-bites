@@ -41,9 +41,10 @@ all_foods_in_db = crud.get_foods()
 for n in range(5):
     email = f"user{n}@test.com"
     password = "test"
+    fname = f"Test Name{n}"
     phone = "510-555-1234"
 
-    user = crud.create_user(email, password, phone)
+    user = crud.create_user(email, password, fname, phone)
     model.db.session.add(user)
     model.db.session.commit()
 

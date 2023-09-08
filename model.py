@@ -12,6 +12,7 @@ class User(db.Model):
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     email = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(25), nullable=False)
+    fname = db.Column(db.String(50), nullable=False)
     phone = db.Column(db.String(12))
 
     ratings = db.relationship("Rating", back_populates="user")
@@ -30,7 +31,7 @@ class FoodSchedule(db.Model):
     food_id = db.Column(db.Integer, db.ForeignKey('foods.food_id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     to_try_date = db.Column(db.Date, nullable=False)
-    tried = db.Column(db.Boolean)
+    tried = db.Column(db.Boolean, default=False, nullable=False)
 
     user = db.relationship("User", back_populates="food_schedules")
     food = db.relationship("Food", back_populates="food_schedules")

@@ -11,14 +11,14 @@ app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
-MONTHS = ["January", "February", "March", "April", "May", "June", 
-          "July", "August", "September", "October", "November", "December"]
+# MONTHS = ["January", "February", "March", "April", "May", "June", 
+#           "July", "August", "September", "October", "November", "December"]
 
-DAYS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", 
-        "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
-        "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"]
+# DAYS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", 
+#         "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+#         "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"]
 
-YEARS = ["2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030"]
+# YEARS = ["2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030"]
 
 
 @app.route("/")
@@ -100,7 +100,7 @@ def all_foods():
 
     foods = crud.get_foods()
 
-    return render_template("all_foods.html", foods=foods, months=MONTHS, years=YEARS, days=DAYS)
+    return render_template("all_foods.html", foods=foods)
 
 
 @app.route("/foods/<food_id>")
@@ -177,6 +177,14 @@ def edit_calendar():
 
     food_id = request.json.get("id")
     food_name = request.json.get("name")
+    try_date = request.json.get("date")
+
+    logged_in_email = session.get("user_email")
+    user = crud.get_user_by_email(logged_in_email)
+    date = datetime.strptime(try_date, "%Y-%m-%d").date()
+
+    schedule_event = crud.create_food_schedule(food_id, user.user_id, date)
+
     
     # print(food_id, 'line 170')
     # print(food_name, 'line 171')

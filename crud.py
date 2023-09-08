@@ -2,11 +2,12 @@
 
 from model import db, User, FoodSchedule, Food, Rating, connect_to_db
 
-def create_user(email, password, phone):
+def create_user(email, password, fname, phone):
     """Create and return a new user."""
 
-    user = User(email=email, password=password, phone=phone) #may need to add in a default for phone in case they don't add one.
-
+    user = User(email=email, password=password, fname=fname, phone=phone) #may need to add in a default for phone in case they don't add one.
+    db.session.add(user)
+    db.session.commit()
     return user
 
 def get_users():
@@ -21,11 +22,12 @@ def get_user_by_email(email):
     return User.query.filter(User.email == email).first()
 
 
-def create_food_schedule(food, user, to_try_date, tried):
+def create_food_schedule(food_id, user_id, to_try_date, tried=False):
     """Create and return a new food schedule."""
 
-    food_schedule = FoodSchedule(food=food, user=user, to_try_date=to_try_date, tried=tried)
-
+    food_schedule = FoodSchedule(food_id=food_id, user_id=user_id, to_try_date=to_try_date, tried=tried)
+    db.session.add(food_schedule)
+    db.session.commit()
     return food_schedule
 
 
@@ -33,7 +35,8 @@ def create_food(food_name, min_age, nutrition_rating, allergen, external_id):
     """Create and return a new food."""
 
     food = Food(food_name=food_name, min_age=min_age, nutrition_rating=nutrition_rating, allergen=allergen, external_id=external_id)
-
+    db.session.add(food)
+    db.session.commit()
     return food
 
 
@@ -53,7 +56,8 @@ def create_rating(score, food, user, date_rated, comment):
     """Create and return new rating."""
 
     rating = Rating(score=score, food=food, user=user, date_rated=date_rated, comment=comment)
-
+    db.session.add(rating)
+    db.session.commit()
     return rating
 
 
