@@ -27,5 +27,27 @@ addToScheduleButton.forEach(button => button.addEventListener('click', event => 
 }));
 // input to try date, get user id, when clicked update tried to true
 
+const triedCheckbox = document.querySelectorAll('.tried-checkbox');
+
+triedCheckbox.forEach(checkbox => checkbox.addEventListener('click', event => {
+  let tried = event.target.getAttribute("data-tried");
+
+  const data = {
+    tried: tried
+  }
+
+  console.log('successfully clicked!')
+
+  fetch('/create-rating', {
+    method: 'POST',
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(data)
+  })
+  .then((response) => response.json())
+  .then((data) => console.log(data)) 
+
+  window.location.href = `/foods`;
+}));
+
 
 

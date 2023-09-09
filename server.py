@@ -70,6 +70,9 @@ def show_user(user_id):
 
     to_try_dates = sorted(to_try_dates)
 
+    if schedule_event.tried == True:
+        return redirect(f"/foods/{schedule_event.food.food_id}")
+
     return render_template("user_details.html", user=user, 
                            schedule_events=schedule_events,
                            to_try_dates=to_try_dates)
@@ -99,8 +102,9 @@ def all_foods():
     """View all foods."""
 
     foods = crud.get_foods()
+    user = crud.get_user_by_email(session.get("user_email"))
 
-    return render_template("all_foods.html", foods=foods)
+    return render_template("all_foods.html", foods=foods, user=user)
 
 
 @app.route("/foods/<food_id>")

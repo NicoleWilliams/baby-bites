@@ -17,6 +17,11 @@
           <li>
             <a href="/foods/{{ schedule_event.food.food_id }}">
             {{ schedule_event.food.food_name }}</a> 
+
+            <input type="checkbox" class="tried-checkbox" name="tried-checkbox" 
+            id="tried-checkbox-{{ schedule_event.food.food_id }}" 
+            data-tried="{{ schedule_event.tried }}">
+            <label for="tried-checkbox">Tried</label>
           </li>
         </ul>
       {% endif %}
