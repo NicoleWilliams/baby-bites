@@ -10,6 +10,7 @@
 <h2>Schedule</h2>
 
 {% for to_try_date in to_try_dates %}
+
 <h3>{{ to_try_date }}</h3>
     {% for schedule_event in schedule_events %}
       {% if schedule_event.to_try_date == to_try_date %}
@@ -19,7 +20,7 @@
             {{ schedule_event.food.food_name }}</a> 
 
             <input type="checkbox" class="tried-checkbox" name="tried-checkbox" 
-            id="tried-checkbox-{{ schedule_event.food.food_id }}" 
+            data-food-id="{{ schedule_event.food.food_id }}" 
             data-tried="{{ schedule_event.tried }}">
             <label for="tried-checkbox">Tried</label>
           </li>
@@ -40,10 +41,19 @@
   {% for rating in user.ratings %}
   <tr>
     <td>{{ rating.food.food_name }}</td>
-    <td>{{ rating.score }}</td>
+    {% if rating.score == 1 %}
+    <td>&#128525;</td>
+    {% endif %}
+    {% if rating.score == 2 %}
+    <td>&#128528;</td>
+    {% endif %}
+    {% if rating.score == 3 %}
+    <td>&#129314;</td>
+    {% endif %}
     <td>{{ rating.date_rated.strftime("%x") }}</td>
     <td>{{ rating.comment }}</td>
   </tr>
   {% endfor %}
 </table>
+<script src="/static/event_handlers.js" type="text/javascript"></script>
 {% endblock %}

@@ -15,18 +15,13 @@
   <form action="/foods/{{ food.food_id }}/ratings" method="POST">
     <p>
       Rating:
-      <input type="radio" name="rating-value" value="love" id="love">
-      <label for="love">&#128512;</label>
-      <input type="radio" name="rating-value" value="meh" id="meh">
-      <label for="love">&#128512;</label>
-      <input type="radio" name="rating-value" value="yuck" id="yuck">
-      <label for="love">&#128512;</label>
-      <select name="rating">
-        <option value="">Select rating</option>
-        {% for num in range (1,4) %}
-        <option value="{{ num }}">{{ num }}</option>
-        {% endfor %}
-      </select>
+      <input type="radio" name="rating" value="1" id="love">
+      <label for="love">&#128525;</label>
+      <input type="radio" name="rating" value="2" id="meh">
+      <label for="love">&#128528;</label>
+      <input type="radio" name="rating" value="3" id="yuck">
+      <label for="love">&#129314;</label>
+
     </p>
     <p>
       <label for="comment">Comments:</label>

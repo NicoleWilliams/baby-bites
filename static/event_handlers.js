@@ -31,9 +31,11 @@ const triedCheckbox = document.querySelectorAll('.tried-checkbox');
 
 triedCheckbox.forEach(checkbox => checkbox.addEventListener('click', event => {
   let tried = event.target.getAttribute("data-tried");
+  let foodId = event.target.getAttribute("data-food-id");
 
   const data = {
-    tried: tried
+    tried: tried,
+    foodId: foodId
   }
 
   console.log('successfully clicked!')
@@ -46,7 +48,7 @@ triedCheckbox.forEach(checkbox => checkbox.addEventListener('click', event => {
   .then((response) => response.json())
   .then((data) => console.log(data)) 
 
-  window.location.href = `/foods`;
+  window.location.href = `/foods/${foodId}`;
 }));
 
 

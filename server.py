@@ -43,13 +43,14 @@ def register_user():
 
     email = request.form.get("email")
     password = request.form.get("password")
+    fname = request.form.get("fname")
     phone = request.form.get("phone")
 
     user = crud.get_user_by_email(email)
     if user:
         flash("User already exists. Try again.")
     else:
-        user = crud.create_user(email, password, phone)
+        user = crud.create_user(email, password, fname, phone)
         db.session.add(user)
         db.session.commit()
         flash("Account created! Please log in.")
@@ -61,6 +62,9 @@ def register_user():
 def show_user(user_id):
     """Show details on a user."""
 
+    if user_id != session["user_id"]:
+        render_template("incorrect_user.html")
+
     user = crud.get_user_by_id(user_id)
     schedule_events = crud.get_schedule_ids_by_user_id(user_id)
     to_try_dates = set()
@@ -70,8 +74,11 @@ def show_user(user_id):
 
     to_try_dates = sorted(to_try_dates)
 
-    if schedule_event.tried == True:
-        return redirect(f"/foods/{schedule_event.food.food_id}")
+    if schedule_events == None:
+        print("Your schedule is empty. Add some foods to try!")
+
+    # if schedule_event.tried == True:
+    #     return redirect(f"/foods/{schedule_event.food.food_id}")
 
     return render_template("user_details.html", user=user, 
                            schedule_events=schedule_events,
@@ -92,6 +99,7 @@ def process_login():
         flash("The email or password you entered is incorrect.")
     else:
         session["user_email"] = user.email
+        session["user_id"] = user.user_id
         flash(f"Hello again, {user.email}.") ## want to replace email with name
 
     return redirect(f"/users/{user.user_id}") 
@@ -102,9 +110,9 @@ def all_foods():
     """View all foods."""
 
     foods = crud.get_foods()
-    user = crud.get_user_by_email(session.get("user_email"))
+    user = session.get("user_id")
 
-    return render_template("all_foods.html", foods=foods, user=user)
+    return render_template("all_foods.html", foods=foods, user_id=user)
 
 
 @app.route("/foods/<food_id>")
@@ -138,7 +146,14 @@ def create_rating(food_id):
         db.session.add(rating)
         db.session.commit()
 
-        flash(f"You rated this food {rating_score}.")
+        if rating_score == "1":
+            message = "loved"
+        elif rating_score == "2":
+            message = "had neutral feelings about"
+        elif rating_score == "3":
+            message = "didn't like"
+
+        flash(f"You {message} this food.")
 
     return redirect(f"/foods/{food_id}")
 
@@ -151,28 +166,6 @@ def update_rating():
     db.session.commit()
 
     return "Rating updated"
-
-
-# @app.route("/users/calendar/<user>", methods=["POST"])
-# def create_calendar():
-#     """Create a food calendar for a user."""
-
-#     logged_in_email = session.get("user_email")
-
-#     if logged_in_email is None:
-#         flash("You must log in to create a schedule.")
-#     else:
-#         user = crud.get_user_by_email(logged_in_email)
-
-#     food_schedule = crud.create_food_schedule(food="", user=user, 
-#                                               to_try_date="", tried=False)
-    
-#     db.session.add(food_schedule)
-#     db.session.commit()
-
-#     return redirect(f"/calendar/{user}")
-
-
 
 
 @app.route("/edit-calendar", methods=["POST"])
@@ -188,13 +181,6 @@ def edit_calendar():
     date = datetime.strptime(try_date, "%Y-%m-%d").date()
 
     schedule_event = crud.create_food_schedule(food_id, user.user_id, date)
-
-    
-    # print(food_id, 'line 170')
-    # print(food_name, 'line 171')
-    # add date picker and add into form data, 
-    # grab in flask view route and store, 
-    # redirect to schedule
     
     return jsonify({'status': 200, 'message': "Schedule updated"})
 
