@@ -40,6 +40,7 @@ triedCheckbox.forEach(checkbox => checkbox.addEventListener('click', event => {
 
   console.log('successfully clicked!')
 
+  // change below route to /remove-from-cal-when-tried
   fetch('/create-rating', {
     method: 'POST',
     headers: {"Content-Type": "application/json"},
@@ -47,6 +48,7 @@ triedCheckbox.forEach(checkbox => checkbox.addEventListener('click', event => {
   })
   .then((response) => response.json())
   .then((data) => console.log(data)) 
+  
 
   window.location.href = `/foods/${foodId}`;
 }));

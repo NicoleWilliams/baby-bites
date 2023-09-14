@@ -11,15 +11,6 @@ app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
-# MONTHS = ["January", "February", "March", "April", "May", "June", 
-#           "July", "August", "September", "October", "November", "December"]
-
-# DAYS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", 
-#         "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
-#         "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"]
-
-# YEARS = ["2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030"]
-
 
 @app.route("/")
 def homepage():
@@ -100,7 +91,7 @@ def process_login():
     else:
         session["user_email"] = user.email
         session["user_id"] = user.user_id
-        flash(f"Hello again, {user.email}.") ## want to replace email with name
+        flash(f"Hello again, {user.fname}.")
 
     return redirect(f"/users/{user.user_id}") 
 
@@ -185,22 +176,33 @@ def edit_calendar():
     return jsonify({'status': 200, 'message': "Schedule updated"})
 
 
-@app.route("/calendar/<schedule_id>")
-def view_calendar(schedule_id):
-    """View calendar with scheduled foods."""
+@app.route("/remove-from-cal-when-tried", methods=["POST"])
+def remove_from_cal_when_tried():
+    "Removes an event from the calendar once the tried button is clicked."
+    tried = request.json.get("tried")
+    food_id = request.json.get("foodId")
 
-    logged_in_email = session.get("user_email")
+    # Do I want to move the food schedule events into a list of tried items?
 
-    if logged_in_email is None:
-        flash("You must log in to view your schedule.")
-    else:
-        user = crud.get_user_by_email(logged_in_email)
-        food_schedule = crud.get_schedule_by_id(schedule_id)
-        to_try_date = crud.get_to_try_dates_by_schedule_id(schedule_id)
+    return jsonify({'message': "removed from schedule"})
 
-    return render_template("food_schedule.html", user=user, 
-                           food_schedule=food_schedule, 
-                           to_try_date=to_try_date)
+
+# @app.route("/calendar/<schedule_id>")
+# def view_calendar(schedule_id):
+#     """View calendar with scheduled foods."""
+
+#     logged_in_email = session.get("user_email")
+
+#     if logged_in_email is None:
+#         flash("You must log in to view your schedule.")
+#     else:
+#         user = crud.get_user_by_email(logged_in_email)
+#         food_schedule = crud.get_schedule_by_id(schedule_id)
+#         to_try_date = crud.get_to_try_dates_by_schedule_id(schedule_id)
+
+#     return render_template("food_schedule.html", user=user, 
+#                            food_schedule=food_schedule, 
+#                            to_try_date=to_try_date)
 
 
 @app.route("/ratings")

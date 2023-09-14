@@ -7,11 +7,32 @@
         "external_id": "Apple"
     },
     {
+        "name": "Avocado",
+        "min_age": "6 months",
+        "nutrition_rating": 5,
+        "allergen": false,
+        "external_id": "Avocado"  
+    },
+    {
         "name": "Banana",
         "min_age": "6 months",
         "nutrition_rating": 5,
         "allergen": false,
         "external_id": "Banana" 
+    },
+    {
+        "name": "Black Beans",
+        "min_age": "6 months",
+        "nutrition_rating": 5,
+        "allergen": false,
+        "external_id": "Black Beans"  
+    },
+    {
+        "name": "Bread",
+        "min_age": "6 months",
+        "nutrition_rating": 2,
+        "allergen": true,
+        "external_id": "Bread"  
     },
     {
         "name": "Cheese",
@@ -21,11 +42,18 @@
         "external_id": "Cheese"  
     },
     {
-        "name": "Yogurt",
+        "name": "Egg",
         "min_age": "6 months",
-        "nutrition_rating": 5,
+        "nutrition_rating": 6,
         "allergen": true,
-        "external_id": "Yogurt"    
+        "external_id": "Egg"  
+    },
+    {
+        "name": "Ham",
+        "min_age": "24 months",
+        "nutrition_rating": 3,
+        "allergen": false,
+        "external_id": "Ham"  
     },
     {
         "name": "Honey",
@@ -35,10 +63,45 @@
         "external_id": "Honey"  
     },
     {
-        "name": "Ham",
-        "min_age": "24 months",
+        "name": "Orange",
+        "min_age": "6 months",
+        "nutrition_rating": 5,
+        "allergen": false,
+        "external_id": "Orange"  
+    },
+    {
+        "name": "Peanut & Peanut Butter",
+        "min_age": "6 months",
+        "nutrition_rating": 5,
+        "allergen": true,
+        "external_id": "Peanut & Peanut Butter"  
+    },
+    {
+        "name": "Strawberry",
+        "min_age": "6 months",
         "nutrition_rating": 3,
         "allergen": false,
-        "external_id": "Ham"  
+        "external_id": "Strawberry"  
+    },
+    {
+        "name": "Tempeh",
+        "min_age": "6 months",
+        "nutrition_rating": 5,
+        "allergen": true,
+        "external_id": "Tempeh"  
+    },
+    {
+        "name": "Tomato",
+        "min_age": "6 months",
+        "nutrition_rating": 3,
+        "allergen": false,
+        "external_id": "Tomato"  
+    },
+    {
+        "name": "Yogurt",
+        "min_age": "6 months",
+        "nutrition_rating": 5,
+        "allergen": true,
+        "external_id": "Yogurt"    
     }
 ]
