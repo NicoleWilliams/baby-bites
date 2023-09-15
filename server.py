@@ -104,6 +104,7 @@ def all_foods():
     user = session.get("user_id")
 
     return render_template("all_foods.html", foods=foods, user_id=user)
+    
 
 
 @app.route("/foods/<food_id>")

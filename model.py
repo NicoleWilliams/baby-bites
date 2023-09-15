@@ -63,7 +63,7 @@ class Food(db.Model):
     __tablename__ = "foods"
 
     food_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    food_name = db.Column(db.String(30), nullable=False)
+    food_name = db.Column(db.String(50), nullable=False)
     min_age = db.Column(db.String(30))
     nutrition_rating = db.Column(db.Integer)
     allergen = db.Column(db.Boolean)

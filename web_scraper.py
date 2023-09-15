@@ -46,29 +46,48 @@ foods = ["egg", "strawberry", "avocado", "tomato", "banana", "bread", "apple", "
          "passion-fruit", "cassava", 'sauerkraut', "teff", "maple-syrup", "plaice", "kohlrabi"]
 
 
-for food in foods[:3]:
+for food in foods:
 
     URL = f"https://solidstarts.com/foods/{food}"
     page = requests.get(URL)
     soup = BeautifulSoup( page.content, 'html.parser')
 
 
-    food_name = soup.find("h2", class_="font-sofia-bold text-3xl lg:text-4xl text-slate mb-4")
-    print(food_name.text)
+    name = soup.find("h2", class_="font-sofia-bold text-3xl lg:text-4xl text-slate mb-4")
+    # print(name.text)
 
     tags = soup.find_all("p", class_="font-sofia-medium tracking-normal text-slate text-lg lg:text-xl font-smooth")
     allergen = tags[1]
-    print(allergen.text)
+    # print(allergen.text)
 
-    age = tags[2]
-    print(age.text)
+    min_age = tags[2]
+    # print(min_age.text)
 
     nutrition_rating = 5
     stars = soup.find_all("svg", class_="text-red")
     for star in stars:
         if "opacity-25" in str(star):
             nutrition_rating -= 1
-            print(nutrition_rating)
+            # print(nutrition_rating)
+
+    food_data[food] = {}
+    food_data[food]["name"] = name.text
+    food_data[food]["min_age"] = min_age.text
+    food_data[food]["nutrition_rating"] = nutrition_rating
+    food_data[food]["allergen"] = allergen.text
+    food_data[food]["external_id"] = food
+    # print(food_data[food])
+
+    
+    # name, min_age, nutrition_rating, allergen, external_id = (
+    #     food["name"],
+    #     food["min_age"],
+    #     food["nutrition_rating"],
+    #     food["allergen"],
+    #     food["external_id"],
+    # )
+
+print(food_data)
 
 
 import json
