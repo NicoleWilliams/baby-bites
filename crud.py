@@ -49,7 +49,7 @@ def get_food_by_id(food_id):
 def get_foods():
     """Return all foods."""
 
-    return Food.query.all()
+    return Food.query.order_by(Food.food_name).all()
 
 
 def create_rating(score, food, user, date_rated, comment):

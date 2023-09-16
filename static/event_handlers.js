@@ -5,8 +5,8 @@ console.log('js is working')
 const addToScheduleButton = document.querySelectorAll('.add-to-schedule-button');
 
 addToScheduleButton.forEach(button => button.addEventListener('click', event => {
-  let foodName = event.target.getAttribute("data-name")
-  let foodId = event.target.getAttribute("data-id")
+  let foodName = event.target.getAttribute('data-name')
+  let foodId = event.target.getAttribute('data-id')
   let tryDate = document.querySelector(`#try-date-${foodId}`).value
   
   console.log(tryDate)
@@ -19,7 +19,7 @@ addToScheduleButton.forEach(button => button.addEventListener('click', event => 
 
   fetch('/edit-calendar', { 
     method: 'POST',
-    headers: {"Content-Type": "application/json"},
+    headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(data)
   })
   .then((response) => response.json())
@@ -30,8 +30,8 @@ addToScheduleButton.forEach(button => button.addEventListener('click', event => 
 const triedCheckbox = document.querySelectorAll('.tried-checkbox');
 
 triedCheckbox.forEach(checkbox => checkbox.addEventListener('click', event => {
-  let tried = event.target.getAttribute("data-tried");
-  let foodId = event.target.getAttribute("data-food-id");
+  let tried = event.target.getAttribute('data-tried');
+  let foodId = event.target.getAttribute('data-food-id');
 
   const data = {
     tried: tried,
@@ -43,7 +43,7 @@ triedCheckbox.forEach(checkbox => checkbox.addEventListener('click', event => {
   // change below route to /remove-from-cal-when-tried
   fetch('/create-rating', {
     method: 'POST',
-    headers: {"Content-Type": "application/json"},
+    headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(data)
   })
   .then((response) => response.json())
@@ -52,6 +52,7 @@ triedCheckbox.forEach(checkbox => checkbox.addEventListener('click', event => {
 
   window.location.href = `/foods/${foodId}`;
 }));
+
 
 
 
