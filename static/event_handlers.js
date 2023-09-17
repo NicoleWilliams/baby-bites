@@ -38,10 +38,7 @@ triedCheckbox.forEach(checkbox => checkbox.addEventListener('click', event => {
     foodId: foodId
   }
 
-  console.log('successfully clicked!')
-
-  // change below route to /remove-from-cal-when-tried
-  fetch('/create-rating', {
+  fetch('/mark-as-tried', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(data)
@@ -53,6 +50,9 @@ triedCheckbox.forEach(checkbox => checkbox.addEventListener('click', event => {
   window.location.href = `/foods/${foodId}`;
 }));
 
-
+// function searchFunction() {
+//   let foodInput = document.getElementById("food-name-search");
+//   window.find(foodInput)
+// }
 
 

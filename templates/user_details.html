@@ -11,9 +11,9 @@
 
 {% for to_try_date in to_try_dates %}
 
-<h3>{{ to_try_date }}</h3>
+<h4>{{ to_try_date }}</h4>
     {% for schedule_event in schedule_events %}
-      {% if schedule_event.to_try_date == to_try_date %}
+      {% if schedule_event.to_try_date == to_try_date %} 
         <ul>
           <li>
             <a href="/foods/{{ schedule_event.food.food_id }}">

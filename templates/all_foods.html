@@ -4,15 +4,13 @@
 
 {% block body %}
 <p><a href="/users/{{ user_id }}">Return to Profile</a></p>
-<form type="submit" name="food-search-form">
-  <input type="search" id="food-name-search" placeholder="Search a food">
-  <button type="button">&#128269</button>
-</form>
-<button type="submit" name="sort-food-button" id="sort-food-button">Sort foods A-Z</button>
-<ul>
+<!-- <input type="search" id="food-name-search" placeholder="Search a food" onsearch="searchFunction()">
+<p id="searched-food"></p> -->
+
+<ul id="food-list">
   {% for food in foods %}
 
-    <li id="food-list">
+    <li>
       <a href="/foods/{{ food.food_id }}">
         {{ food.food_name }}</a>
 

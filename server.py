@@ -61,7 +61,8 @@ def show_user(user_id):
     to_try_dates = set()
     
     for schedule_event in schedule_events:
-        to_try_dates.add(schedule_event.to_try_date)
+        if schedule_event.tried == False:
+            to_try_dates.add(schedule_event.to_try_date)
 
     to_try_dates = sorted(to_try_dates)
 
@@ -177,13 +178,16 @@ def edit_calendar():
     return jsonify({'status': 200, 'message': "Schedule updated"})
 
 
-@app.route("/remove-from-cal-when-tried", methods=["POST"])
-def remove_from_cal_when_tried():
+@app.route("/mark-as-tried", methods=["POST"])
+def mark_as_tried():
     "Removes an event from the calendar once the tried button is clicked."
     tried = request.json.get("tried")
     food_id = request.json.get("foodId")
-
-    # Do I want to move the food schedule events into a list of tried items?
+    logged_in_email = session.get("user_email")
+    user = crud.get_user_by_email(logged_in_email)
+    food_schedule = crud.get_food_schedule(user=user, food_id=food_id)
+    food_schedule.tried = True
+    db.session.commit()
 
     return jsonify({'message': "removed from schedule"})
 

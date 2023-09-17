@@ -46,6 +46,13 @@ def get_food_by_id(food_id):
     return Food.query.get(food_id)
 
 
+def get_food_schedule(user, food_id):
+    """Return a food schedule event based on a user and food id."""
+
+    return FoodSchedule.query.filter_by(food_id=food_id, user=user).first()
+
+
+
 def get_foods():
     """Return all foods."""
 
