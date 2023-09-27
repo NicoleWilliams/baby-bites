@@ -1,4 +1,5 @@
-{
+
+{ 
     "acai": {"name": "Acai", "min_age": "6 months", "nutrition_rating": 3, "allergen": false, "external_id": "acai"}, 
     "apple": {"name": "Apple", "min_age": "6 months", "nutrition_rating": 3, "allergen": false, "external_id": "apple"}, 
     "apricot": {"name": "Apricot", "min_age": "6 months", "nutrition_rating": 4, "allergen": false, "external_id": "apricot"}, 

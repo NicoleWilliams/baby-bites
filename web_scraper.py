@@ -87,7 +87,7 @@ for food in foods:
     #     food["external_id"],
     # )
 
-print(food_data)
+# print(food_data)
 
 
 import json

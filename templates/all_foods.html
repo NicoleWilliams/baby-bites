@@ -4,19 +4,23 @@
 
 {% block body %}
 <p><a href="/users/{{ user_id }}">Return to Profile</a></p>
-<!-- <input type="search" id="food-name-search" placeholder="Search a food" onsearch="searchFunction()">
-<p id="searched-food"></p> -->
+<form id="search-form">
+  <label for="food-name-search">Search A Food</label>
+  <input type="text" id="food-name-search" name="food-name-search" >
+  <input type="submit">
+</form>
+<p id="searched-food"></p>
 
 <ul id="food-list">
   {% for food in foods %}
 
-    <li>
+    <li id="{{ food.external_id }}">
       <a href="/foods/{{ food.food_id }}">
         {{ food.food_name }}</a>
 
         <form type="submit" name="add-to-schedule-form" class="add-to-schedule-form">
           
-          <label for="add-to-schedule-form">Select a date to try this food.</label>
+          <!-- <label for="add-to-schedule-form">Select a date to try this food.</label> -->
 
           <input type="date" class="try-date" name="try-date" id="try-date-{{ food.food_id }}">
           

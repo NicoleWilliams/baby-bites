@@ -180,7 +180,8 @@ def edit_calendar():
 
 @app.route("/mark-as-tried", methods=["POST"])
 def mark_as_tried():
-    "Removes an event from the calendar once the tried button is clicked."
+    """Removes an event from the calendar once the tried button is clicked."""
+
     tried = request.json.get("tried")
     food_id = request.json.get("foodId")
     logged_in_email = session.get("user_email")
@@ -190,6 +191,22 @@ def mark_as_tried():
     db.session.commit()
 
     return jsonify({'message': "removed from schedule"})
+
+
+@app.route("/create-food-dict", methods=["POST"])
+def create_food_dict():
+    """Creates a food dictionary with name and external id from database."""
+
+    foods_dict = {}
+    foods = crud.get_foods()
+    
+    for food in foods:
+        foods_dict[food] = {"name": food.food_name, "external_id": food.external_id}
+
+    return jsonify(foods_dict)
+
+
+
 
 
 # @app.route("/calendar/<schedule_id>")
