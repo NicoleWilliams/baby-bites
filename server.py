@@ -44,6 +44,7 @@ def register_user():
         user = crud.create_user(email, password, fname, phone)
         db.session.add(user)
         db.session.commit()
+        session["user_id"] = user.user_id
         flash("Account created! Please log in.")
 
     return redirect("/")
@@ -53,7 +54,7 @@ def register_user():
 def show_user(user_id):
     """Show details on a user."""
 
-    if user_id != session["user_id"]:
+    if int(user_id) != session["user_id"]:
         render_template("incorrect_user.html")
 
     user = crud.get_user_by_id(user_id)
@@ -193,7 +194,7 @@ def mark_as_tried():
     return jsonify({'message': "removed from schedule"})
 
 
-@app.route("/create-food-dict", methods=["POST"])
+@app.route("/create-food-dict")
 def create_food_dict():
     """Creates a food dictionary with name and external id from database."""
 
@@ -201,7 +202,7 @@ def create_food_dict():
     foods = crud.get_foods()
     
     for food in foods:
-        foods_dict[food] = {"name": food.food_name, "external_id": food.external_id}
+        foods_dict[food.food_name] = {"name": food.food_name, "external_id": food.external_id}
 
     return jsonify(foods_dict)
 

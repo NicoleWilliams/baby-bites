@@ -62,16 +62,10 @@ triedCheckbox.forEach(checkbox => checkbox.addEventListener('click', event => {
 // fetch request, new route. in the route, query the database for food. loop through foods,
 // create and return a dictionary with just the pieces of info I want. DONE
 const foodData = {}
-function createFoodDict() {
-fetch('/create-food-dict', {
-  method: 'POST',
-  headers: {'Content-Type': 'application/json'},
-  body: JSON.stringify('hello')
-})
-  .then((response) => response.json())
-  .then((data) => console.log(data))}
 
-createFoodDict()
+fetch('/create-food-dict')
+  .then((response) => response.json())
+  .then((data) => {foodData = data}) // assignment to constant variable error
 
 
 // Step 1: User types in a a food they're searching for ==> form.input.value 
