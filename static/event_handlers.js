@@ -61,7 +61,7 @@ triedCheckbox.forEach(checkbox => checkbox.addEventListener('click', event => {
     
 // fetch request, new route. in the route, query the database for food. loop through foods,
 // create and return a dictionary with just the pieces of info I want. DONE
-const foodData = {}
+let foodData = {}
 
 fetch('/create-food-dict')
   .then((response) => response.json())
@@ -70,16 +70,19 @@ fetch('/create-food-dict')
 
 // Step 1: User types in a a food they're searching for ==> form.input.value 
 //    (we need to get this value when user submits on click submit) DONE
-document.querySelector('#search-form').addEventListener('submit', (evt) => {
-  const queryStr = document.querySelector('#food-name-search').value
-  const re = new RegExp(/\w+/ + queryStr, "gi")
-  const filteredKeys = Object.keys(foodData).filter(k => re.match(k))
-  console.log(filteredKeys)
-})
-
 // Step 2: Once you grab the value, add it to your regex search object, and 
 //    search against your json data to match on either Object.keys(jsonData) ==> 
 //    list of all your jsonData keys 
+
+document.querySelector('#search-form').addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  const queryStr = document.querySelector('#food-name-search').value;
+  const re = new RegExp(queryStr, "gi");
+  const filteredKeys = Object.keys(foodData).match(re); 
+  // const filteredKeys = Object.keys(foodData).filter(k => re.search(k))
+  console.log(filteredKeys);
+})
+
 // Step 3: If filtering for matching keys, take iterate through list of keys 
 //    and grab the values in the jsonData for the external ids => 
 
