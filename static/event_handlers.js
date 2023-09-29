@@ -65,8 +65,9 @@ let foodData = {}
 
 fetch('/create-food-dict')
   .then((response) => response.json())
-  .then((data) => {foodData = data}) // assignment to constant variable error
-
+  .then((data) => {foodData = data
+    // console.log(foodData);
+  }) 
 
 // Step 1: User types in a a food they're searching for ==> form.input.value 
 //    (we need to get this value when user submits on click submit) DONE
@@ -78,9 +79,24 @@ document.querySelector('#search-form').addEventListener('submit', (evt) => {
   evt.preventDefault();
   const queryStr = document.querySelector('#food-name-search').value;
   const re = new RegExp(queryStr, "gi");
-  const filteredKeys = Object.keys(foodData).match(re); 
+  // loop through everything. if not null, continue
+  // const keys = Object.keys(foodData)
+  // for (i, key in enumerate(keys)) {
+  //   if (key[i].match(re)) {
+  //     console.log(key[i]);
+  //   }
+  // }
+  console.log(foodData[queryStr]) // need to capitalize search for key to work
+  for (let i = 0; i < foodData.length; i++) {
+    console.log(foodData[i])
+    if (foodData[i].match(re)) {
+      console.log(foodData[i]);
+    }
+  }
+  
+  // console.log(filteredKeys.match(re)); 
   // const filteredKeys = Object.keys(foodData).filter(k => re.search(k))
-  console.log(filteredKeys);
+  // console.log(filteredKeys);
 })
 
 // Step 3: If filtering for matching keys, take iterate through list of keys 
