@@ -77,27 +77,11 @@ fetch('/create-food-dict')
 
 document.querySelector('#search-form').addEventListener('submit', (evt) => {
   evt.preventDefault();
-  const queryStr = document.querySelector('#food-name-search').value;
-  const re = new RegExp(queryStr, "gi");
-  // loop through everything. if not null, continue
-  // const keys = Object.keys(foodData)
-  // for (i, key in enumerate(keys)) {
-  //   if (key[i].match(re)) {
-  //     console.log(key[i]);
-  //   }
-  // }
-  console.log(foodData[queryStr]) // need to capitalize search for key to work
-  for (let i = 0; i < foodData.length; i++) {
-    console.log(foodData[i])
-    if (foodData[i].match(re)) {
-      console.log(foodData[i]);
-    }
-  }
-  
-  // console.log(filteredKeys.match(re)); 
-  // const filteredKeys = Object.keys(foodData).filter(k => re.search(k))
-  // console.log(filteredKeys);
+  const queryStr = document.querySelector('#food-name-search').value.toLowerCase();
+  const filteredKeys = Object.keys(foodData).filter(k => k.includes(queryStr))
+  console.log(filteredKeys);
 })
+
 
 // Step 3: If filtering for matching keys, take iterate through list of keys 
 //    and grab the values in the jsonData for the external ids => 

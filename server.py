@@ -202,7 +202,7 @@ def create_food_dict():
     foods = crud.get_foods()
     
     for food in foods:
-        foods_dict[food.food_name] = {"name": food.food_name, "external_id": food.external_id}
+        foods_dict[food.food_name.lower()] = {"name": food.food_name, "external_id": food.external_id}
 
     return jsonify(foods_dict)
 
