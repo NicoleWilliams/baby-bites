@@ -51,16 +51,6 @@ triedCheckbox.forEach(checkbox => checkbox.addEventListener('click', event => {
 }));
 
 
-// function getJsonData() {
-//   fetch("../data/food_data.json")
-//     .then((res) => {
-//       return res.json();
-//     })
-//     .then((data) => console.log(data));
-// }
-    
-// fetch request, new route. in the route, query the database for food. loop through foods,
-// create and return a dictionary with just the pieces of info I want. DONE
 let foodData = {}
 
 fetch('/create-food-dict')
@@ -71,20 +61,25 @@ fetch('/create-food-dict')
 
 // Step 1: User types in a a food they're searching for ==> form.input.value 
 //    (we need to get this value when user submits on click submit) DONE
-// Step 2: Once you grab the value, add it to your regex search object, and 
-//    search against your json data to match on either Object.keys(jsonData) ==> 
-//    list of all your jsonData keys 
+// Step 2: Once you grab the value, search against your json data to match on
+//    either Object.keys(jsonData) ==> list of all your jsonData keys 
 
 document.querySelector('#search-form').addEventListener('submit', (evt) => {
   evt.preventDefault();
   const queryStr = document.querySelector('#food-name-search').value.toLowerCase();
   const filteredKeys = Object.keys(foodData).filter(k => k.includes(queryStr))
-  console.log(filteredKeys);
+  // console.log(filteredKeys);
+  const externalIds = []
+  filteredKeys.forEach(key => {
+    // console.log(key);
+    externalIds.push(foodData[key]['external_id']);
+  });
+  
+  // console.log(externalIds)
 })
 
-
-// Step 3: If filtering for matching keys, take iterate through list of keys 
-//    and grab the values in the jsonData for the external ids => 
+// Step 3: If filtering for matching keys, iterate through list of keys 
+//    and grab the values in the jsonData for the external ids => DONE
 
 // EX.  
 // const jsonData = {
@@ -105,26 +100,10 @@ document.querySelector('#search-form').addEventListener('submit', (evt) => {
 //      to the dom to display
 
 
-// const foodArray = JSON.parse(jsonData);
 
 
 
 
-
-
-// function searchFunction() {
-//   let foodInput = document.getElementById("food-name-search");
-//   let n = foodInput.search("#food-name-search")
-// }
-
-// function filterFunction(foodInput) {
-//   let filteredFoods = foods.filter((x) => { 
-//       return x.includes(foodInput)
-//   })
-//   return filteredFoods
-// }
-
-// const foodNames = ['Apple', 'Bread']
 
 // function appendNodes(filteredFoods) {
 //   let container = document.getElementById('searched-food');
