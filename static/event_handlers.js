@@ -75,8 +75,29 @@ document.querySelector('#search-form').addEventListener('submit', (evt) => {
     externalIds.push(foodData[key]['external_id']);
   });
   
+  const foodList = document.querySelector('#food-list')
+  foodList.innerHTML=""
+  console.log(filteredKeys)
+  filteredKeys.forEach(key => {
+    console.log(key)
+    foodList.insertAdjacentHTML('beforeend', `<li id="${foodData[key]['external_id']}"> \
+    <a href="/foods/${foodData[key]['food_id']}"> \
+      ${foodData[key]['name']}</a> \
+      <form type="submit" name="add-to-schedule-form" class="add-to-schedule-form"> \
+        <input type="date" class="try-date" name="try-date" id="try-date-${foodData[key]['food_id']}"> \
+        <button type="button" class="add-to-schedule-button" data-name="${foodData[key]['name']}" \
+        data-id="${foodData[key]['food_id']}">Add To Schedule</button> \
+      </form> \
+    <p></p> \
+  </li>`); 
+    
+  })
+
   // console.log(externalIds)
 })
+
+
+
 
 // Step 3: If filtering for matching keys, iterate through list of keys 
 //    and grab the values in the jsonData for the external ids => DONE
@@ -92,9 +113,10 @@ document.querySelector('#search-form').addEventListener('submit', (evt) => {
 // user search input value: "Apple"
 
 // filter Object.keys(jsonData) that match "Apple" regex ==> return a list of filter 
-//      jsonData keys
+//      jsonData keys DONE
 // iterate through the list of filtered jsonData keys to match keys in jsonData 
-//      to get the value ==> {..., externalId: ...}
+//      to get the value ==> {..., externalId: ...} DONE
+//***** */
 // return list of externalIds and iterate through each one to filter <li> elements 
 //      that match on li#externalId ==> list of <li> elements ==> return <li> elements 
 //      to the dom to display
