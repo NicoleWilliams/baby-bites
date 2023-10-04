@@ -7,6 +7,7 @@
 
 <p><a href="/foods">View all available foods to try</a></p>
 
+<section id="schedule-section">
 <h2>Schedule</h2>
 
 {% for to_try_date in to_try_dates %}
@@ -28,8 +29,9 @@
       {% endif %}
     {% endfor %}
   {% endfor %}
+</section>
 
-
+<section id="ratings-section">
 <h2>Ratings</h2>
 <table>
   <tr>
@@ -55,5 +57,6 @@
   </tr>
   {% endfor %}
 </table>
+</section>
 <script src="/static/event_handlers.js" type="text/javascript"></script>
 {% endblock %}

@@ -1,0 +1,64 @@
+.welcome {
+    padding: 25px;
+    text-align: center;
+}
+
+
+body {
+    background-color: #364958;
+    color: #C9E4CA; 
+}
+
+
+h1 {
+    font-family: 'Playfair Display', serif; 
+    font-weight: 900;
+    font-size: 45px;
+}
+
+
+h2 {
+    font-family: 'Playfair Display', serif; 
+    font-weight: bold;
+    font-size: 21px;
+}
+
+
+p {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 14px;
+} 
+
+
+p a {
+    color: black;
+} 
+
+
+.create-account {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+
+.login {
+    text-align: center;
+}
+
+/* #schedule-section {
+    
+}
+
+
+#ratings-section {
+    
+} */
+
+/* .homepage-input {
+    overflow: hidden;
+  }
+
+input {
+    float: right;
+    clear: both;
+  } */
