@@ -3,7 +3,7 @@
 {% block title %}{{ user.fname }}'s Page{% endblock %}
 
 {% block body %}
-<h1>{{ user.fname }}'s Page</h1>
+<header class="welcome"><h1>{{ user.fname }}'s Page</h1></header>
 
 <p><a href="/foods">View all available foods to try</a></p>
 
@@ -12,7 +12,7 @@
 
 {% for to_try_date in to_try_dates %}
 
-<h4>{{ to_try_date }}</h4>
+<h3>{{ to_try_date }}</h3>
     {% for schedule_event in schedule_events %}
       {% if schedule_event.to_try_date == to_try_date %} 
         <ul>
@@ -30,6 +30,9 @@
     {% endfor %}
   {% endfor %}
 </section>
+
+
+
 
 <section id="ratings-section">
 <h2>Ratings</h2>

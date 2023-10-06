@@ -5,8 +5,8 @@
   <header class="welcome"><h1>Welcome!</h1></header>
 
   <section class="create-account">
-  <h2>Create an Account</h2>
-  <form action="/users" method="POST">
+  <h2>Create An Account</h2>
+  <form id="create-account-form" action="/users" method="POST">
     <p class="homepage-input">
       Name <input type="fname" name="fname">
     </p>
@@ -23,7 +23,7 @@
       Phone <input type="phone" name="phone">
     </p> -->
 
-    <p>
+    <p class="submit-button">
       <input type="submit">
     </p>
   </form>
@@ -31,7 +31,7 @@
 
   <section class="login">
   <h2>Log In</h2>
-  <form action="/login" method="POST">
+  <form id="login-form" action="/login" method="POST">
     <p class="homepage-input">
       Email <input type="text" name="email">
     </p>
@@ -40,7 +40,7 @@
       Password <input type="password" name="password">
     </p>
 
-    <p>
+    <p class="submit-button">
       <input type="submit">
     </p>
   </form>
