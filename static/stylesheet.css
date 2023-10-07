@@ -25,6 +25,11 @@ h2 {
 }
 
 
+h3 {
+    font-weight: bold;
+}
+
+
 p {
     font-size: 14px;
 } 
@@ -33,6 +38,10 @@ p {
 a {
     color: #FFFFFF;
 } 
+
+ul {
+    margin: 0;
+}
 
 
 .create-account {
@@ -86,7 +95,28 @@ a {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 }
+
+
+table {
+    border-collapse: collapse;
+    border: 2px solid #353535;
+}
+
+table td {
+    border: 2px solid #353535; 
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+table th {
+    border: 2px solid #353535; 
+    padding: 5px;
+}
+
+
 
 .homepage-input {
     margin-top: 5px;
