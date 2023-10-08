@@ -103,7 +103,7 @@ def get_schedule_ids_by_user_id(user_id):
     """Return all schedule ids from a user id."""
 
     schedules = FoodSchedule.query.filter(FoodSchedule.user_id == user_id).all()
-    print(schedules)
+    # print(schedules)
     return schedules
 
 
