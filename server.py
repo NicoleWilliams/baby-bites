@@ -93,7 +93,7 @@ def process_login():
     else:
         session["user_email"] = user.email
         session["user_id"] = user.user_id
-        flash(f"Hello again, {user.fname}.")
+        # flash(f"Hello again, {user.fname}.")
 
     return redirect(f"/users/{user.user_id}") 
 
