@@ -3,34 +3,42 @@
 {% block title %}{{ food.food_name }}{% endblock %}
 
 {% block body %}
-<h1>{{ food.food_name }}</h1>
+<header class="hero-image"><h1 class="hero-text">{{ food.food_name }}</h1></header>
 
-  <p>Minimum Age: {{ food.min_age }}</p>
-  <p>Nutrition Rating: {{ food.nutrition_rating }}</p>
-  <p>Common Allergen: {{ food.allergen }}</p>
-
+<section id="food-info-section">
+  <h2>Nutritional Information</h2>
+  <p style="margin-top: 0px; margin-bottom: 10px;"><strong>Minimum Age:</strong> {{ food.min_age }}</p>
+  <p style="margin-top: 0px; margin-bottom: 10px;"><strong>Nutrition Rating:</strong> {{ food.nutrition_rating }}</p>
+  <p style="margin-top: 0px; margin-bottom: 10px;"><strong>Common Allergen:</strong> {{ food.allergen }}</p>
+</section>
   
   {% if session.get('user_email') %}
-  <h2>Rate this food</h2>
+  <section id="rate-this-food-section">
+  <h2 style="margin-bottom: 0px;">Rate this food</h2>
   <form action="/foods/{{ food.food_id }}/ratings" method="POST">
     <p>
-      Rating:
+      <strong>Rating:</strong>
       <input type="radio" name="rating" value="1" id="love">
       <label for="love">&#128525;</label>
       <input type="radio" name="rating" value="2" id="meh">
       <label for="love">&#128528;</label>
       <input type="radio" name="rating" value="3" id="yuck">
       <label for="love">&#129314;</label>
-
     </p>
     <p>
-      <label for="comment">Comments:</label>
+      <label for="comment"><strong>Comments:</strong></label>
       <input type="text" id="comment" name="comment">
     </p>
 
-    <p><input type="submit"></p>
+    <p class="submit-button">
+      <input type="submit" style="background-color: #FFEADD;  
+      box-shadow: 0px 0px 0px transparent;
+      border: 0px solid transparent;
+      text-shadow: 0px 0px 0px transparent;
+      font-family: 'Quicksand', sans-serif;"></p>
   </form>
+  </section>
   {% endif %}
 
-  <p><a href="/users/{{ user.user_id }}">Return to Profile</a></p>
+  <div class="return-to-profile" style="margin-bottom: 100px;"><a href="/users/{{ user.user_id }}">Return to Profile</a></div>
   {% endblock %}

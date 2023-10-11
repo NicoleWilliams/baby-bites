@@ -3,35 +3,36 @@
 {% block title %}{{ user.fname }}'s Page{% endblock %}
 
 {% block body %}
-<header class="welcome"><h1>{{ user.fname }}'s Page</h1></header>
+<header class="hero-image"><h1 class="hero-text">{{ user.fname }}'s Page</h1></header>
 
-<p id="view-available-foods"><a href="/foods">View all available foods to try</a></p>
+<section  id="view-available-foods">
+  <a href="/foods">View all foods</a>
+</section>
 
 
 <section id="schedule-section">
-<h2>Schedule</h2>
+<h2 id="schedule-header" style="text-align: center;">Schedule</h2>
 
 {% for to_try_date in to_try_dates %}
 
-<h3>{{ to_try_date }}</h3>
+<h3 style="text-align: center;">{{ to_try_date }}</h3>
     {% for schedule_event in schedule_events %}
       {% if schedule_event.to_try_date == to_try_date and schedule_event.tried == False %} 
-        <ul>
+        <ul >
           <li>
-            <a href="/foods/{{ schedule_event.food.food_id }}">
-            {{ schedule_event.food.food_name }}</a> 
-
             <input type="checkbox" class="tried-checkbox" name="tried-checkbox" 
             data-food-id="{{ schedule_event.food.food_id }}" 
             data-tried="{{ schedule_event.tried }}">
-            <label for="tried-checkbox">Tried</label>
+            
+            <a href="/foods/{{ schedule_event.food.food_id }}">
+            {{ schedule_event.food.food_name }}</a> 
           </li>
         </ul>
+        
       {% endif %}
     {% endfor %}
   {% endfor %}
 </section>
-
 
 
 

@@ -3,9 +3,11 @@
 {% block title %}All Foods{% endblock %}
 
 {% block body %}
-<p><a href="/users/{{ user_id }}">Return to Profile</a></p>
+<header class="hero-image"><h1 class="hero-text">All Foods</h1></header>
+
+<div class="return-to-profile"><a href="/users/{{ user_id }}">Return to Profile</a></div>
 <form id="search-form">
-  <label for="food-name-search">Search A Food</label>
+  <label for="food-name-search"><strong>Search A Food</strong></label>
   <input type="text" id="food-name-search" name="food-name-search" >
   <input type="submit">
 </form>
