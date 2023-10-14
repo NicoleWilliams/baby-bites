@@ -74,6 +74,7 @@ document.querySelector('#search-form').addEventListener('submit', (evt) => {
     // console.log(key);
     externalIds.push(foodData[key]['external_id']);
   });
+
   
   const foodList = document.querySelector('#food-list')
   foodList.innerHTML=""
@@ -93,8 +94,33 @@ document.querySelector('#search-form').addEventListener('submit', (evt) => {
     
   })
 
+  const addToScheduleButton = document.querySelectorAll('.add-to-schedule-button');
+
+  addToScheduleButton.forEach(button => button.addEventListener('click', event => {
+    let foodName = event.target.getAttribute('data-name')
+    let foodId = event.target.getAttribute('data-id')
+    let tryDate = document.querySelector(`#try-date-${foodId}`).value
+    
+    console.log(tryDate)
+
+    const data = {
+      id: foodId, 
+      name: foodName,
+      date: tryDate
+    }
+
+    fetch('/edit-calendar', { 
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data)
+    })
+    .then((response) => response.json())
+    .then((data) => console.log(data))  
+  }));
   // console.log(externalIds)
 })
+
+
 
 
 
