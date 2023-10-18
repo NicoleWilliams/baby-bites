@@ -19,11 +19,13 @@ body {
     align-items: center;
 }
 
+
 .hero-text {
     text-align: center;
     position: absolute;
     color: white;
 }
+
 
 h1 {
     font-weight: 600;
@@ -53,6 +55,7 @@ a {
     color: #555252;
 } 
 
+
 #view-available-foods {
     text-align: center;
     width: 150px;
@@ -66,10 +69,12 @@ a {
     margin-bottom: 25px;
 }
 
+
 ul {
     margin: 0;
     list-style-type: none;
 }
+
 
 input:focus-visible {
     outline: none
@@ -83,6 +88,7 @@ input:focus-visible {
     align-items: center;
 
 }
+
 
 #create-account-form {
     display: flex;
@@ -152,6 +158,7 @@ input:focus-visible {
     font-weight: 600;
 }
 
+
 #schedule-section {
     width: 300px;
     text-align: left;
@@ -173,8 +180,8 @@ table {
     border-collapse: collapse;
     border: 2px solid #353535;
     margin-bottom: 100px;
-    /* background-color: #3C6E71; */
 }
+
 
 table td {
     border: 2px solid #353535; 
@@ -184,10 +191,12 @@ table td {
     font-weight: 300;
 }
 
+
 table th {
     border: 2px solid #353535; 
     padding: 5px;
 }
+
 
 #food-list {
     width: 280px;
@@ -196,12 +205,14 @@ table th {
     margin-right: auto;
 }
 
+
 #search-form {
     width: 350px;
     text-align: left;
     margin-left: auto;
     margin-right: auto;
 }
+
 
 .homepage-input {
     display: flex;
@@ -218,6 +229,3 @@ table th {
     border-radius: 50.346px;
   }
 
-/* input {
-    padding: 2px;
-  } */

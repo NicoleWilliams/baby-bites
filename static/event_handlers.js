@@ -25,7 +25,6 @@ addToScheduleButton.forEach(button => button.addEventListener('click', event => 
   .then((response) => response.json())
   .then((data) => console.log(data))  
 }));
-// input to try date, get user id, when clicked update tried to true
 
 const triedCheckbox = document.querySelectorAll('.tried-checkbox');
 
@@ -59,10 +58,6 @@ fetch('/create-food-dict')
     // console.log(foodData);
   }) 
 
-// Step 1: User types in a a food they're searching for ==> form.input.value 
-//    (we need to get this value when user submits on click submit) DONE
-// Step 2: Once you grab the value, search against your json data to match on
-//    either Object.keys(jsonData) ==> list of all your jsonData keys 
 
 document.querySelector('#search-form').addEventListener('submit', (evt) => {
   evt.preventDefault();
@@ -119,75 +114,3 @@ document.querySelector('#search-form').addEventListener('submit', (evt) => {
   }));
   // console.log(externalIds)
 })
-
-
-
-
-
-
-// Step 3: If filtering for matching keys, iterate through list of keys 
-//    and grab the values in the jsonData for the external ids => DONE
-
-// EX.  
-// const jsonData = {
-//   'apple': {name: 'Apple', externalId: 'apple'},
-//   'apple-pie': {name: 'Apple Pie', externalId: 'apple-pie'},
-//   'banana': {name: 'Banana', externalId: 'banana'},
-//   'banana-apple': {name: 'Banana Apple', externalId: 'banana-apple'},
-// }
-
-// user search input value: "Apple"
-
-// filter Object.keys(jsonData) that match "Apple" regex ==> return a list of filter 
-//      jsonData keys DONE
-// iterate through the list of filtered jsonData keys to match keys in jsonData 
-//      to get the value ==> {..., externalId: ...} DONE
-//***** */
-// return list of externalIds and iterate through each one to filter <li> elements 
-//      that match on li#externalId ==> list of <li> elements ==> return <li> elements 
-//      to the dom to display
-
-
-
-
-
-
-
-// function appendNodes(filteredFoods) {
-//   let container = document.getElementById('searched-food');
-//   if (filteredFoods != "no results"){
-//        container.innerText = ""
-//        filteredFoods.map((food) => {
-//           let p = document.createElement("P")
-//           p.innerText = food
-//           container.appendChild(p)
-//        })
-//    } else {
-//        container.innerText = "no results"
-//    }
-// }
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   appendNodes(foodNames)
-// });
-
-// function onKeyUp(event) {
-//   let str = event.target.value.toLowerCase().substring(0, 3)
-//   let filteredArr = foodNames.filter((x) => {
-//     let xSub = x.substring(0,3).toLowerCase()
-//       return x.toLowerCase().includes(str) || checkName(xSub, str)
-//   })
-//   if (filteredArr.length > 0){
-//       appendNodes(filteredArr)
-//   } else {
-//       appendNodes("no results")
-//   }
-// }
-
-// function checkName(name, str) {
-//   let pattern = str.split("").map((x) => {
-//       return `(?=.*${x})`
-//   }).join("");
-//   let regex = new RegExp(`${pattern}`, "g")
-//   return name.match(regex);
-// }

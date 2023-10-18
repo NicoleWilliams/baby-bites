@@ -207,37 +207,6 @@ def create_food_dict():
     return jsonify(foods_dict)
 
 
-
-
-
-# @app.route("/calendar/<schedule_id>")
-# def view_calendar(schedule_id):
-#     """View calendar with scheduled foods."""
-
-#     logged_in_email = session.get("user_email")
-
-#     if logged_in_email is None:
-#         flash("You must log in to view your schedule.")
-#     else:
-#         user = crud.get_user_by_email(logged_in_email)
-#         food_schedule = crud.get_schedule_by_id(schedule_id)
-#         to_try_date = crud.get_to_try_dates_by_schedule_id(schedule_id)
-
-#     return render_template("food_schedule.html", user=user, 
-#                            food_schedule=food_schedule, 
-#                            to_try_date=to_try_date)
-
-
-@app.route("/ratings")
-def view_ratings():
-    """View a list of foods tried and ratings given."""
-
-    ratings = crud.return_ratings()
-
-    return render_template("all_ratings.html", ratings=ratings)
-
-
-
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(host="0.0.0.0", debug=True)
