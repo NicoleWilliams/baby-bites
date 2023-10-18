@@ -33,7 +33,7 @@ Baby Bites is an app built using Python on a Flask server. It uses a PostgreSQL 
 
 ## Features
 
-![alt text](https://github.com/NicoleWilliams/baby-bites/blob/main/static/screenshots/BB%20Homepage.png "Baby Bites Login")
+![alt text]( "Baby Bites Login")
 
 From the homepage, a user is able to create an account. If an account already exists, the user can log in. 
 
