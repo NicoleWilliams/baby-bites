@@ -159,6 +159,20 @@ input:focus-visible {
 }
 
 
+.return-to-all-foods {
+    text-align: center;
+    width: 250px;
+    padding: 5px 0px;
+    border-radius: 50.346px;
+    background-color: #A0CBDA;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+
 #schedule-section {
     width: 300px;
     text-align: left;
